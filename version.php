@@ -15,5 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+$plugin->component = 'block_get_certificate';
 $plugin->version = 2009072901;
+$plugin->dependencies = array('mod_certificate' => ANY_VERSION);
 
