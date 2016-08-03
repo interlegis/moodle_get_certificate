@@ -4,7 +4,7 @@ require_once("../../config.php");
 global $DB;
 
 // Prepare page
-$context = get_context_instance(CONTEXT_SYSTEM);
+$context = context_system::instance(); // get_context_instance(CONTEXT_SYSTEM);
 $PAGE->set_pagelayout('standard');
 $PAGE->set_url('/blocks/get_certificate/index.php');
 $PAGE->set_context($context);
@@ -27,8 +27,7 @@ foreach ($issues as $issue) {
     $certificate = $DB->get_record('certificate', array('id' => $issue->certificateid));
     $course = $DB->get_record('course', array('id' => $certificate->course));
     $cm = get_coursemodule_from_instance('certificate', $certificate->id);
-//    $link = html_writer::link(new moodle_url('/mod/certificate/review.php', array('id'=>$cm->id, 'action'=>'get')), $icon);
-    $url = new moodle_url('/mod/certificate/review.php', array('id'=>$cm->id, 'action'=>'get'));
+    $url = new moodle_url('/blocks/get_certificate/review.php', array('id'=>$cm->id, 'action'=>'get'));
     $action = new popup_action('click', $url, 'view'.$cm->id, array('height' => 600, 'width' => 800));
     $link = new action_link($url, $icon, $action);
     $line = array($issue->code, userdate($issue->timecreated), $course->fullname, $OUTPUT->render($link));
